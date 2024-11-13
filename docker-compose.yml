@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    command: bundle exec rails s -b '0.0.0.0' -p 3000
+    volumes:
+      - ".:/app"
+    ports:
+      - "3000:3000"
+    environment:
+      - RAILS_ENV=development
+    depends_on:
+      - db-migrate
+
+  db-migrate:
+    build: .
+    command: bundle exec rails db:create db:migrate
+    volumes:
+      - ".:/app"
+    environment:
+      - RAILS_ENV=development
