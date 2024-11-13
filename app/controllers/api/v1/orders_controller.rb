@@ -7,6 +7,8 @@ module Api
         calculate_total_amount(order)
 
         if order.save
+          order.calculate_best_discount
+
           OrderCompletionJob.set(wait: 1.minutes).perform_later(order.id)
 
           render_success( { order: order, items: order.order_items })
