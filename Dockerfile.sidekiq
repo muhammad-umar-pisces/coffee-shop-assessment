@@ -1,0 +1,18 @@
+# Dockerfile for Sidekiq
+FROM ruby:3.1.2
+
+# Install dependencies
+RUN apt-get update -qq && apt-get install -y postgresql-client nodejs redis-server
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the Gemfile and install gems
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+# Copy the rest of the app
+COPY . .
+
+# Run Sidekiq process
+CMD ["bundle", "exec", "sidekiq"]

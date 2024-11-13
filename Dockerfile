@@ -2,7 +2,7 @@
 FROM ruby:3.2.2
 
 # Install dependencies
-RUN apt-get update -qq && apt-get install -y nodejs npm sqlite3 libsqlite3-dev
+RUN apt-get update -qq && apt-get install -y nodejs npm sqlite3 libsqlite3-dev redis-server
 
 # Set an environment variable to not generate excessive log output
 ENV RAILS_ENV=development

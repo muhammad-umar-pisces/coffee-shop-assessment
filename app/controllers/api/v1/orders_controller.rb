@@ -7,6 +7,8 @@ module Api
         calculate_total_amount(order)
 
         if order.save
+          OrderCompletionJob.set(wait: 1.minutes).perform_later(order.id)
+
           render_success( { order: order, items: order.order_items })
         else
           render_error(order.errors.full_messages.to_sentence, :unprocessable_entity)
