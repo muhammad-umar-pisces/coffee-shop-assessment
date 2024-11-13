@@ -15,7 +15,7 @@ services:
 
   db-migrate:
     build: .
-    command: bundle exec rails db:create db:migrate
+    command: bundle exec rails db:create db:migrate db:seed
     volumes:
       - ".:/app"
     environment:
