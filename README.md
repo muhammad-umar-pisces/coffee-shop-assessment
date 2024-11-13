@@ -31,5 +31,20 @@ Follow these steps to set up and run the Coffee Shop POS system with Docker:
 First, clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/coffee-shop-pos.git
-cd coffee-shop-pos
+git clone https://github.com/muhammad-umar-pisces/coffee-shop-assessment.git
+cd coffee-shop-assessment
+```
+
+### 2. Run following command 
+```bash
+docker-compose build
+```
+then
+```bash
+docker-compose up
+```
+
+### 3. Now hit your endpoints on following
+```bash 
+http://localhost:3000
+```
