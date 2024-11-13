@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_13_120155) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_13_125046) do
   create_table "customers", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -74,9 +74,21 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_13_120155) do
     t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.decimal "amount_paid", precision: 10, scale: 2, null: false
+    t.string "payment_method", null: false
+    t.string "payment_status", default: "pending"
+    t.datetime "payment_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_payments_on_order_id"
+  end
+
   add_foreign_key "discounts", "items"
   add_foreign_key "notifications", "orders"
   add_foreign_key "order_items", "items"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "customers"
+  add_foreign_key "payments", "orders"
 end
