@@ -38,7 +38,7 @@ class Order < ApplicationRecord
      best_discount_value = [best_discount_value, group_discount_value].max
 
      # Return the best discount value (either individual or group)
-     self.update(total_amount: self.total_amount - best_discount_value)
+     self.update(total_amount: (self.total_amount - best_discount_value) + self.calculate_tax)
    end
 
    # Calculate individual discount for an order item
@@ -69,5 +69,13 @@ class Order < ApplicationRecord
        end
      end
      group_discount_value
+   end
+
+   def calculate_tax
+    tax = []
+    self.items.each do |item|
+      tax << total_amount * (item.tax_rate / 100)
+    end
+    tax.sum
    end
 end
